@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>02_v-bind</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body>
+<div id="app">
+    <p>{{msg}}</p>
+    <input type="button" v-bind:value="value">
+    <input type="button" :value="value+'直接使用:'">
+    <input type="button" :value="value+'字符串'">
+
+</div>
+
+<script>
+    var vm = new Vue ({
+        el:'#app',
+        data:{
+            msg:'使用v-bind绑定属性',
+            value:'按钮'
+        }
+    })
+</script>
+</body>
+</html>

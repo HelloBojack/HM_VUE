@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>01_{{}}&v-cloak&v-text&v-html</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+
+        <ol>
+            <li>only{{}}&nbsp;&nbsp;&nbsp;<span>==={{msg}}===</span><span>&nbsp;&nbsp;&nbsp;受网络影响闪烁，不替换内容</span></li>
+            </br>
+            <li>v-cloak&nbsp;&nbsp;&nbsp;<span v-cloak>==={{msg}}===</span><span>&nbsp;&nbsp;&nbsp;解决{{}}受网络影响闪烁的问题，不替换内容</span></li>
+            </br>
+            <li>v-text&nbsp;&nbsp;&nbsp;<span v-text="msg">===</span><span>&nbsp;&nbsp;&nbsp;不受网络影响闪烁，替换内容</span></li>
+            </br>
+            <li>v-html&nbsp;&nbsp;&nbsp;<span v-html="msgHtml">===</span><span>&nbsp;&nbsp;&nbsp;不受网络影响闪烁，替换内容，解析html标签</span></li>
+        </ol>
+
+    </div>
+
+    <script>
+        var vm = new Vue ({
+            el:'#app',
+            data:{
+                msg:'Hello Vue',
+                msgHtml:'<s>Hello Vue</s>'
+            }
+        })
+    </script>
+    </body>
+</html>
