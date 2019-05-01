@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>0</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <style>
+        .cnt {
+            background-color: gainsboro;
+            margin-top:100px;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            height: 100px;
+            padding: 30px 0;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <p>{{msg}}</p>
+    <p>v-model只能用于表单</p>
+    <input type="text" v-model="msg">
+    <input type="text" v-model="msg">
+    <input type="button" value="修改" @click="alter()">
+
+    <div class="cnt">
+        <input type="text" v-model="n1">
+        <select v-model="se">
+            <option value="+">+</option>
+            <option value="-">-</option>
+            <option value="*">*</option>
+            <option value="/">/</option>
+        </select>
+        <input type="text" v-model="n2">
+        <input type="button" name="" id="" @click="cal()" value="=">
+        <input type="text" v-model="sum">
+    </div>
+</div>
+
+<script>
+    var vm = new Vue ({
+        el:'#app',
+        data:{
+            msg:'Hello Vue',
+            n1:0,
+            n2:0,
+            sum:0,
+            se:'+',
+        },
+        methods:{
+            alter(){
+                this.msg=(this.msg==='Hello Vue')?'Hello World':'Hello Vue';
+            },
+            cal(){
+                // switch (this.se) {
+                //     case '+':
+                //         this.sum = parseInt(this.n1)+parseInt(this.n2);
+                //         break;
+                //     case '-':
+                //         this.sum = parseInt(this.n1)-parseInt(this.n2);
+                //         break;
+                //     case '*':
+                //         this.sum = parseInt(this.n1)*parseInt(this.n2);
+                //         break;
+                //     case '/':
+                //         this.sum = parseInt(this.n1)/parseInt(this.n2);
+                //         break;
+                // }
+                this.sum =eval("parseInt("+this.n1+")"+this.se+"parseInt("+this.n2+");");
+            },
+
+        },
+
+    })
+</script>
+</body>
+</html>

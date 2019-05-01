@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>0</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <style>
+        #app {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .d {
+            width: 100px;
+            height: 100px;
+            background-color: cyan;
+            margin: 10px;
+        }
+        .dv {
+            width: 200px;
+            height: 200px;
+            background-color: pink;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <div class="d" @click="dlog()">
+        <input type="button" value="normal" @click="blog()">
+    </div>
+    <div class="d" @click="dlog()">
+        <input type="button" value="stop" @click.stop="blog()">
+        <a href="#" @click.prevent.stop="alog()">prevent</a>
+    </div>
+    <div class="d" @click.capture="dlog()">
+        <input type="button" value="capture" @click="blog()">
+    </div>
+    <div class="d" @click.self="dlog()">
+        <input type="button" value="self" @click="blog()">
+    </div>
+    <div class="d" @click="dlog()">
+        <a href="http://www.baidu.com" @click.prevent.once.stop="alog()">prevent&once</a>
+    </div>
+
+    <div class="dv" @click="dlog()">
+        <div class="d" @click="dlog()">
+            <input type="button" value="stop&self" @click="blog()">
+        </div>
+    </div>
+
+</div>
+
+<script>
+    var vm = new Vue ({
+        el:'#app',
+        data:{
+
+        },
+        methods:{
+            dlog(){
+                console.log("div");
+            },
+            alog(){
+                console.log("a");
+            },
+            blog(){
+                console.log("btn");
+            }
+        }
+    })
+</script>
+</body>
+</html>
