@@ -9,17 +9,24 @@
 </head>
 <body>
 <div id="app">
-
+    <p :style="{color:'pink','font-size':'50px'}">{{msg}}</p>
+    <p :style="styleObj,styleObj1">{{msg}}</p>
+    <p :style="[styleObj,styleObj1]">{{msg}}</p>
 </div>
 
 <script>
     var vm = new Vue ({
         el:'#app',
         data:{
-
+            msg:'Hello Vue',
+            flag:false,
+            styleObj:{color:'pink','font-size':'50px'},
+            styleObj1:{'font-weight':200}
         },
         methods:{
-
+            alt:function () {
+                this.flag=(this.flag===false);
+            },
         },
     })
 </script>

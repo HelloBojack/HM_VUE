@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>0</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <style>
+
+
+    </style>
+</head>
+<body>
+<div id="app">
+    <input type="text" v-model="id">
+    <input type="text" v-model="name">
+    <input type="button" value="ADD" @click="add()">
+
+    <p v-for="per in personLst" :key="per.id ">
+        <input type="checkbox">{{per.id}}-----{{per.name}}
+    </p>
+
+
+</div>
+
+<script>
+    var vm = new Vue ({
+        el:'#app',
+        data:{
+            id:'',
+            name:'',
+            personLst:[
+                {id:1,name:'徐乐康'},
+                {id:2,name:'Bojack'},
+                {id:3,name:'夏洛克'},
+                {id:4,name:'XLK'},
+                {id:5,name:'K'},
+            ]
+        },
+        methods:{
+            add(){
+                this.personLst.unshift({id:this.id,name:this.name})
+            },
+        },
+    })
+</script>
+</body>
+</html>

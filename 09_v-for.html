@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>0</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body>
+<div id="app">
+    <p v-for="(num,i) in lst">index={{i}}---value={{num}}</p>
+    <br>
+    <p v-for="(obj,i) in objLst">index={{i}}---value={{obj}}--name={{obj.name}}--age={{obj.age}}</p>
+    <br>
+    <p v-for="(value,key,i) in user">valuse={{value}}---key={{key}}---index={{i}}</p>
+    <br>
+    <span v-for="i in 10">{{i}}</span>
+</div>
+
+<script>
+    var vm = new Vue ({
+        el:'#app',
+        data:{
+            lst:[1,2,3],
+            objLst:[
+            {name:'x',age:10},
+            {name:'y',age:20},
+            {name:'z',age:30},
+            ],
+            user:{
+              name:'xulekang',
+              age:23,
+              gender:"male",
+            },
+        },
+        methods:{
+
+        },
+    })
+</script>
+</body>
+</html>
