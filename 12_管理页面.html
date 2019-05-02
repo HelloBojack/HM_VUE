@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>0</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+        #app {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 100px;
+
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">添加</h3>
+        </div>
+        <div class="panel-body form-inline">
+            <label for="id">
+                ID:
+                <input type="text" id="id" class="form-control" v-model="id">
+            </label>
+            <label for="name">
+                Name:
+                <input type="text" id="name" class="form-control" v-model="name" @keyup.enter="add()">
+            </label>
+
+            <input type="button" value="添加" class="btn btn-primary" @click="add()">
+
+            <label for="search">
+                搜索:
+                <input type="text" id="search" class="form-control" v-model="keywords" v-focus>
+            </label>
+            <input type="button" value="切换时间" class="btn btn-primary" @click="shiftTime()">
+        </div>
+    </div>
+
+    <table class="table table-bordered table-hover table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Time</th>
+                <th>Operation</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr v-for="item in searcher(keywords)" :key="item.id">
+                <td>{{item.id}}</td>
+                <td v-text="item.name"></td>
+                <td>{{item.time | dateFormat(dateF) }}</td>
+                <td>
+                    <a href="#" @click.prevent="del(item.id)">删除</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<script>
+    Vue.filter('dateFormat',function (dataStr,pattern) {
+        var dt=new Date(dataStr);
+        var y=dt.getFullYear();
+        var m=(dt.getMonth()+1).toString().padStart(2,'0');
+        var d=dt.getDate().toString().padStart(2,'0');;
+
+        // return y+'-'+m+'-'+d;
+
+        if(pattern){
+            return `${y}-${m}-${d}`;
+        }
+        else {
+            var h=dt.getHours().toString().padStart(2,'0');;
+            var mm=dt.getMinutes().toString().padStart(2,'0');;
+            var s=dt.getSeconds().toString().padStart(2,'0');;
+            return `${y}-${m}-${d} ${h}:${mm}:${s}`;
+        }
+    });
+
+    Vue.config.keyCodes.F2=113;
+
+    Vue.directive('focus',{
+        inserted:function (el) {
+            el.focus();
+        }
+    });
+
+    var vm = new Vue ({
+        el:'#app',
+        data:{
+            id:'',
+            name:'',
+            keywords:'',
+            dateF:'true',
+            lst:[
+                {id:1,name:'奔驰',time:new Date()},
+                {id:2,name:'宝马',time:new Date()},
+                {id:3,name:'大众',time:new Date()},
+                {id:4,name:'特斯拉',time:new Date()},
+            ]
+        },
+        methods:{
+            add(){
+                if (this.id&&this.name){
+                this.lst.push({id:this.id,name:this.name,time:new Date()});
+                this.id=this.name='';
+                }
+            },
+            del(id){
+                // this.lst.some(
+                //     (item,i)=>{
+                //         if (item.id===id){
+                //             this.lst.splice(i,1);
+                //             return true;
+                //         }
+                //     }
+                // )
+
+                var i =this.lst.findIndex(item=>{
+                    if (item.id===id) {
+                        return true;
+                    }
+                })
+                this.lst.splice(i,1);
+            },
+            searcher(keywords){
+                // var newLst=[];
+                // this.lst.forEach(item=>{
+                //     if (item.name.indexOf(keywords)!=-1){
+                //         newLst.push(item);
+                //     }
+                // })
+                // return newLst;
+
+                var newLst = this.lst.filter(item=>{
+                    if (item.name.includes(keywords)){
+                        return item;
+                    }
+                });
+                return newLst;
+            },
+
+            shiftTime(){
+                this.dateF=!this.dateF;
+            }
+
+        },
+        filters:{
+            filtersName:function (filtersStr) {
+
+            }
+
+        }
+
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>0</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <p>{{ msg | msgFilter }}</p>
+    <p>{{ msg | msgFilter1(123) }}</p>
+    <p>{{ msg | msgFilter | msgFilter2 }}</p>
+</div>
+
+<script>
+    Vue.filter('msgFilter',function(msg){
+        return msg.replace(/Vue/g,'World');
+    })
+    Vue.filter('msgFilter1',function(msg,arg){
+        return msg.replace(/Vue/g,arg);
+    })
+    Vue.filter('msgFilter2',function(msg){
+        return msg+' Vue';
+    })
+    var vm = new Vue ({
+        el:'#app',
+        data:{
+            msg:'Hello Vue Vue Vue',
+        },
+        methods:{
+
+        },
+    })
+</script>
+</body>
+</html>
